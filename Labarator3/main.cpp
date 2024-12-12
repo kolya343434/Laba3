@@ -13,7 +13,7 @@
 using namespace std;
 
 
-//#include "interface.hpp"
+#include "interface.hpp"
 
 
 #include <iostream>
@@ -293,7 +293,7 @@ public:
 
 */
 
-
+/*
 
 template <class TKey, class T>
 class HashTable;
@@ -488,16 +488,16 @@ int main() {
 
 
 
-
+*/
    
-/*
+
 int main() {
 
     std::setlocale(LC_ALL, "Russian");
-    //interface();
+    interface();
     return 0;
 }
 
-*/
+
 
 
