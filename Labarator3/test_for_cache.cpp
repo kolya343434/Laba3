@@ -1,11 +1,5 @@
 #include "LRUCache.hpp"
-
 #include "Person.hpp"
-
-
-
-
-
 
 void testCache(LRUCache<int, int>& cache) {
     int input, index[10];
@@ -96,6 +90,5 @@ void runCacheTest() {
     // Запускаем тестирование кеша
     testCache(*lruCache);
 
-    // Удаляем объект кеша
     delete lruCache;
 }

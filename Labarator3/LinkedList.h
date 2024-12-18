@@ -23,42 +23,43 @@ public:
 
     class LinkedListIterator : public Sequence<T>::Iterator {
     private:
-
         Node* current;
 
     public:
-
         LinkedListIterator(Node* start) : current(start) { }
 
-
-        int GetValue() const {
-            return current ? current->data : 0; // Возвращаем 0, если узел пуст
+        // Исправленный метод GetValue
+        T GetValue() const override {
+            if (current) {
+                return current->data;
+            }
+            else {
+                throw std::out_of_range("Iterator out of range");
+            }
         }
 
-
-        bool operator==(const typename Sequence<T>::Iterator& other) const override
-        {
+        bool operator==(const typename Sequence<T>::Iterator& other) const override {
             const LinkedListIterator* otherIterator = dynamic_cast<const LinkedListIterator*>(&other);
             return otherIterator && current == otherIterator->current;
         }
 
-        bool operator!=(const typename Sequence<T>::Iterator& other) const override
-        {
+        bool operator!=(const typename Sequence<T>::Iterator& other) const override {
             return !(*this == other);
         }
 
-        T& operator*() override
-        {
-            return current->data;
+        T& operator*() override {
+            if (current) {
+                return current->data;
+            }
+            else {
+                throw std::out_of_range("Dereferencing end iterator");
+            }
         }
 
-        typename Sequence<T>::Iterator& operator++() override
-        {
-            if (current)
-            {
+        typename Sequence<T>::Iterator& operator++() override {
+            if (current) {
                 current = current->next;
             }
-
             return *this;
         }
     };
@@ -263,7 +264,7 @@ public:
         Node* current = head;
         cout << "Elements in the list: ";
         while (current) {
-            cout << current->data << " "; // Теперь оператор << должен работать с типом T
+            cout << current->data << " "<<endl; // Теперь оператор << должен работать с типом T
             current = current->next;
         }
         cout << endl;

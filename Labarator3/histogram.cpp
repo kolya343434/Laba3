@@ -4,21 +4,19 @@
 #include <algorithm>
 
 void interface_for_histogram_people() {
-
-  
     srand(static_cast<unsigned int>(time(nullptr)));
 
-
-    Person<int> persons[100];
-
+    
+    LinkedList<Person<int>> persons;
 
     for (int i = 0; i < 100; ++i) {
-        persons[i].generation();
-    
+        Person<int> p;
+        p.generation();
+        persons.Append(p);
     }
 
     std::string variant1;
-    std::cout << "Should we print people? (Yes/No)" << std::endl;
+    std::cout << "вывести? (Y/N)" << std::endl;
     std::cin >> variant1;
 
     // Преобразуем строку к верхнему регистру для упрощения сравнения
@@ -28,12 +26,10 @@ void interface_for_histogram_people() {
         char firstChar = variant1[0];
         switch (firstChar) {
         case 'Y':
-            for (int i = 0; i < 100; ++i) {
-                persons[i].print();
-            }
+            persons.Print();
             break;
         case 'N':
-            // Не делаем ничего
+            
             break;
         default:
             std::cout << "Invalid input. Exiting." << std::endl;
@@ -45,77 +41,93 @@ void interface_for_histogram_people() {
         return;
     }
 
+    
+    std::cout << "должны ли мы удалять дубликаты: (Y/N): " << std::endl;
+
+    std::string change;
+    std::cin >> change;
+
+    if (!change.empty()) { // Проверяем, что строка не пуста
+        char option = toupper(change[0]); // Приводим к верхнему регистру для удобства
+
+        switch (option) {
+        case 'Y': {
+            print_histogram(persons, [](const Person<int>& p) { return p.age; }, "Age");
+            ISet<Person<int>> iset(persons);
+            iset.RemoveDuplicates();
+           
+            persons.Print();  
+            break;
+        }
+        case 'N': {
+         
+            std::cout << "Duplicates were not removed." << std::endl;
+            break;
+        }
+        default: {
+            std::cout << "Invalid input. Please enter 'Y' or 'N'." << std::endl;
+            break;
+        }
+        }
+    }
+    else {
+        std::cout << "No input provided." << std::endl;
+    }
+   
 
     int variant = 0;
-    std::cout << "Enter needed variant: 1 - age's histogram, 2 - height's histogram, 3 - weight's histogram, 4 - str's histogram\n";
+    std::cout << "выберите нужный вариант: 1 - age's histogram, 2 - height's histogram, 3 - weight's histogram, 4 - str's histogram\n";
     std::cin >> variant;
 
     switch (variant) {
     case 1:
-        print_histogram(persons, 100, [](const Person<int>& p) { return p.age; }, "Age");
-        
+        print_histogram(persons,[](const Person<int>& p) { return p.age; },"Age");
         break;
     case 2:
-        print_histogram(persons, 100, [](const Person<int>& p) { return p.height; }, "Height");
-        
+        print_histogram(persons,[](const Person<int>& p) { return p.height; },"Height");
         break;
     case 3:
-        print_histogram(persons, 100, [](const Person<int>& p) { return p.weight; }, "Weight");
-        
+        print_histogram(persons,[](const Person<int>& p) { return p.weight; },"Weight");
         break;
     case 4:
-        print_histogram(persons, 100, [](const Person<int>& p) { return static_cast<int>(p.str[0]); }, "First letter of string");
-     
+        print_histogram(persons,[](const Person<int>& p) { return static_cast<int>(p.str[0]); },"First letter of string");
         break;
     default:
         std::cout << "Invalid option\n";
         break;
     }
-
 }
 
 
 
 
-void interface_for_histogram_number(int change) {  // Принимаем флаг Iset как параметр
+void interface_for_histogram_number(int change) {  
     LinkedList<int> numbers;
     QuickSort<int> sorterr;
 
     int max_value = -1;
     int min_value = 1000;
 
-    // Ввод данных
+
     std::cout << "Enter 10 numbers" << '\n';
     for (int i = 0; i < 10; ++i) {
         int num;
         std::cin >> num;
-        numbers.Append(num);  // Добавляем элемент в список
+        numbers.Append(num); 
     }
 
-    // Выводим список перед сортировкой для отладки
-    std::cout << "Before sorting: ";
-    numbers.Print();  // Используем метод Print(), чтобы вывести все элементы списка
-    std::cout << std::endl;
-
-    // Сортировка списка
     sorterr.Sort(numbers, ascendingInt);
 
-    // Выводим список после сортировки для отладки
-    std::cout << "After sorting: ";
-    numbers.Print();  // Используем метод Print(), чтобы вывести отсортированные элементы
-    std::cout << std::endl;
-
-    // Если Iset == true, выполняем удаление дубликатов
+   
     if (change == 1) {
-        ISet<int> set(numbers);  // Создаём объект ISet для удаления дубликатов
-        set.RemoveDuplicates();  // Удаляем дубликаты
-        std::cout << "After removing duplicates: ";
-        numbers.Print();  // Выводим результат после удаления дубликатов
+        ISet<int> set(numbers);  
+        set.RemoveDuplicates();  
+      
     }
 
     // Получаем итераторы для начала и конца списка
-    auto begin = numbers.GetFirstElement();  // Итератор на первый элемент
-    auto end = numbers.GetLastElement();      // Итератор на "псевдоконец" списка
+    auto begin = numbers.GetFirstElement();  
+    auto end = numbers.GetLastElement();      
 
     std::cout << "Min value: " << numbers.GetFirstElement() << std::endl;
     std::cout << "Max value: " << numbers.GetLastElement() << std::endl;
@@ -139,10 +151,10 @@ void interface_for_histogram_number(int change) {  // Принимаем флаг Iset как па
                 std::cout << "x ";
                 found = true;
             }
-            ++it;  // Переходим к следующему элементу
+            ++it;  
         }
 
-        // Если в интервале не было значений, выводим "-"
+        
         if (!found) {
             std::cout << "- ";
         }

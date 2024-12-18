@@ -6,12 +6,53 @@
 #include "HashTable.hpp"
 
 
-
-
 void interface_for_histogram_people();
 void interface_for_histogram_number(int change);
 
 
+template <typename T, typename Getter>
+void print_histogram(Sequence<Person<T>>& seq, Getter getter, const std::string& label) {
+    int count = seq.GetLength(); // “еперь проблем нет, seq не const
+
+    if (count == 0) {
+        std::cout << label << " Histogram: No data available.\n";
+        return;
+    }
+
+    // ѕолучаем первое значение и определ€ем min и max
+    T first_value = getter(seq.GetElement(0));
+    T max_value = first_value;
+    T min_value = first_value;
+
+    for (int i = 1; i < count; ++i) {
+        T value = getter(seq.GetElement(i));
+        if (value > max_value) {
+            max_value = value;
+        }
+        if (value < min_value) {
+            min_value = value;
+        }
+    }
+
+    int interval_size = (max_value - min_value) / 10 + 1;
+
+    std::cout << label << " Histogram:\n";
+    for (int i = min_value; i < max_value; i += interval_size) {
+        std::cout.width(2);
+        std::cout << i << " - " << (i + interval_size) << " | ";
+
+        for (int j = 0; j < count; ++j) {
+            T value = getter(seq.GetElement(j));
+            if (value >= i && value < (i + interval_size)) {
+                std::cout << "x ";
+            }
+        }
+
+        std::cout << "\n";
+    }
+}
+
+/*
 template <typename T, typename Getter>
 void print_histogram(Person<T>* persons, int count, Getter getter, const std::string& label) {
     // »нициализаци€ максимального и минимального значений
@@ -45,11 +86,11 @@ void print_histogram(Person<T>* persons, int count, Getter getter, const std::st
         std::cout << "\n";
     }
 }
-
+*/
 
 template <typename TKey, typename T>
 class HashTable; 
-
+/*
 template <typename T, typename Getter>
 void print_histogram(HashTable<int, Person<T>>* hash_table, Getter getter, const std::string& label) {
     // ≈сли размер изменилс€ после удалени€ дубликатов, нужно заново вычисл€ть max_value и min_value
@@ -82,7 +123,7 @@ void print_histogram(HashTable<int, Person<T>>* hash_table, Getter getter, const
     }
 }
 
-
+*/
 
 
 
@@ -93,6 +134,11 @@ inline bool ascendingInt(const int& first, const int& second) {
 inline bool descendingInt(const int& first, const int& second) {
     return first > second;
 }
+
+inline bool CompareByLastAge(const Person<int>& a, const Person<int>& b) {
+    return a.age < b.age;
+}
+
 
 inline bool CompareByLastWeight(const Person<int>& a, const Person<int>& b) {
     return a.weight < b.weight;
