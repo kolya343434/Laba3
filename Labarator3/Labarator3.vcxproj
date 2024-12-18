@@ -131,7 +131,6 @@
     <ClCompile Include="histogram.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="test_for_cache.cpp" />
-    <ClCompile Include="test_for_histogram.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cache.hpp" />
@@ -145,7 +144,7 @@
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="LRUCache.hpp" />
     <ClInclude Include="Sequence.h" />
-    <ClInclude Include="sequence.hpp" />
+    <ClInclude Include="Person.hpp" />
     <ClInclude Include="sorting.h" />
     <ClInclude Include="test_for_cash.hpp" />
   </ItemGroup>

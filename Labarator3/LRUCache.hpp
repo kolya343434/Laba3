@@ -1,6 +1,6 @@
 #ifndef LRUCACHE_HPP_INCLUDED
 #define LRUCACHE_HPP_INCLUDED
-#include <iostream>
+
 #include "IDictionary.hpp"
 #include "iterator.hpp"
 
@@ -22,6 +22,10 @@ struct NodeList
     NodeList(TKey key, TElement value) : key(key), value(value), prev(nullptr), next(nullptr) {}
     NodeList() : prev(nullptr), next(nullptr) {}
 };
+
+
+
+
 
 template <class TKey, class TElement>
 class LRUCache
@@ -85,6 +89,7 @@ public:
             id.Add(key, newNode);
         }
     }
+
     TElement get(TKey key)
     {
         it = this->getIterator(key);

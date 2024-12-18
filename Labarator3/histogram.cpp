@@ -1,184 +1,154 @@
+#include "histogram.hpp"
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+void interface_for_histogram_people() {
+
+  
+    srand(static_cast<unsigned int>(time(nullptr)));
 
 
-/*
-int main() {
-    // Создаем хеш-таблицу с размером 10
-    HashTable<int, std::string> ht(10);
-
-    // Вставка данных в хеш-таблицу
-    ht.insert(0, "Alice");
-    ht.insert(1, "Bob");
-    ht.insert(2, "Charlie");
-
-    // Печать значений по ключам
-    ht.print(0);  // Ожидается "Alice"
-    ht.print(1);  // Ожидается "Bob"
-    ht.print(2);  // Ожидается "Charlie"
-
-    // Удаляем элемент с ключом 1 (Bob)
-    ht.remove(1);
-
-    // Попытка печати удаленного элемента
-    ht.print(1);  // Ожидается сообщение о пустом значении или ошибка, так как Bob был удален
-
-    // Проверка размера хеш-таблицы
-    std::cout << "Size of hash table: " << ht.Getsize() << std::endl;
-
-    return 0;
-}*/
-
-//рабочий для хистограммы и человека 
-/*
-int main() {
-    srand(time(0));
-
-    // Создаем хеш-таблицу
-    HashTable<int, Person<int>> hashTable(10);
-
-    // Заполняем хеш-таблицу случайными людьми
-    for (int i = 0; i < 10; ++i) {
-        Person<int> person;
-        person.generation(); // Генерация случайных данных для каждого человека
-        hashTable.insert(i, person); // Добавляем объект в хеш-таблицу
-    }
-
-    // Пример: построение гистограммы по возрасту
-    auto age_getter = [](const Person<int>& person) {
-        return person.getAge();
-        };
-
-    print_histogram(&hashTable, age_getter, "Age");
-
-    return 0;
-}*/
-/*
-int main() {
-    // Создаём хеш-таблицу с 10 элементами
-    HashTable<int, std::string> hashTable(10);
-
-    // Вставляем элементы
-    hashTable.insert(0, "Alice");
-    hashTable.insert(1, "Bob");
-    hashTable.insert(2, "Alice");  // Дубликат
-    hashTable.insert(3, "Charlie");
-
-    // Выводим таблицу до удаления дубликатов
-    std::cout << "Before RemoveDuplicates:" << std::endl;
-    for (int i = 0; i < hashTable.Getcount(); ++i) {
-        if (!hashTable.indexIsFree(i)) {
-            std::cout << "Key " << i << ": " << hashTable.getValue(i) << std::endl;
-        }
-    }
-
-    // Удаляем дубликаты
-    hashTable.RemoveDuplicates();
-
-    // Выводим таблицу после удаления дубликатов
-    std::cout << "\nAfter RemoveDuplicates:" << std::endl;
-    for (int i = 0; i < hashTable.Getcount(); ++i) {
-        if (!hashTable.indexIsFree(i)) {
-            std::cout << "Key " << i << ": " << hashTable.getValue(i) << std::endl;
-        }
-    }
-
-    return 0;
-}*/
+    Person<int> persons[100];
 
 
-///last
-/*
-void ghghg() {
-    srand(time(0));  // Инициализация генератора случайных чисел
-
-    // Создаем хеш-таблицу
-    HashTable<int, Person<int>> hashTable(10);
-
-    // Заполняем хеш-таблицу случайными людьми
-    for (int i = 0; i < 10; ++i) {
-        Person<int> person;
-        person.generation();  // Генерация случайных данных для каждого человека
-        hashTable.insert(i, person);  // Вставка объекта Person в хеш-таблицу
-    }
-
-    // Выводим содержимое до удаления дубликатов
-    std::cout << "Before RemoveDuplicates:\n";
-    print_histogram(&hashTable, [](const Person<int>& person) { return person.getAge(); }, "Age");
-
+    for (int i = 0; i < 100; ++i) {
+        persons[i].generation();
     
-    std::cout << "\nAfter RemoveDuplicates:\n";
-    print_histogram(&hashTable, [](const Person<int>& person) { return person.getAge(); }, "Age");
-
-   
-}
-*/
-
-
-
-
-//work histogram but do not delte double
-/*
-int main() {
-    srand(time(0));
-
-    // Создаем хеш-таблицу
-    HashTable<int, Person<int>> hashTable(10);
-
-    // Заполняем хеш-таблицу случайными людьми
-    for (int i = 0; i < 10; ++i) {
-        Person<int> person;
-        person.generation(); // Генерация случайных данных для каждого человека
-        hashTable.insert(i, person); // Добавляем объект в хеш-таблицу
     }
 
-    // Пример: построение гистограммы по возрасту
-    auto age_getter = [](const Person<int>& person) {
-        return person.getAge();
-        };
+    std::string variant1;
+    std::cout << "Should we print people? (Yes/No)" << std::endl;
+    std::cin >> variant1;
 
-    // Строим гистограмму до удаления дубликатов
-    std::cout << "Before RemoveDuplicates:\n";
-    print_histogram(&hashTable, age_getter, "Age");
+    // Преобразуем строку к верхнему регистру для упрощения сравнения
+    std::transform(variant1.begin(), variant1.end(), variant1.begin(), ::toupper);
 
-    // Удаляем дубликаты
-    hashTable.RemoveDuplicates();
+    if (!variant1.empty()) {
+        char firstChar = variant1[0];
+        switch (firstChar) {
+        case 'Y':
+            for (int i = 0; i < 100; ++i) {
+                persons[i].print();
+            }
+            break;
+        case 'N':
+            // Не делаем ничего
+            break;
+        default:
+            std::cout << "Invalid input. Exiting." << std::endl;
+            return;
+        }
+    }
+    else {
+        std::cout << "Invalid input. Exiting." << std::endl;
+        return;
+    }
 
-    // Строим гистограмму после удаления дубликатов
-    std::cout << "\nAfter RemoveDuplicates:\n";
-    print_histogram(&hashTable, age_getter, "Age");
 
-    return 0;
-}*/
-/*
-int main() {
-    // Создаем хеш-таблицу с размером 10
-    HashTable<int, std::string> ht(10);
+    int variant = 0;
+    std::cout << "Enter needed variant: 1 - age's histogram, 2 - height's histogram, 3 - weight's histogram, 4 - str's histogram\n";
+    std::cin >> variant;
 
-    // Вставка данных в хеш-таблицу
-    ht.insert(0, "Alice");
-    ht.insert(1, "Bob");
-    ht.insert(2, "Charlie");
+    switch (variant) {
+    case 1:
+        print_histogram(persons, 100, [](const Person<int>& p) { return p.age; }, "Age");
+        
+        break;
+    case 2:
+        print_histogram(persons, 100, [](const Person<int>& p) { return p.height; }, "Height");
+        
+        break;
+    case 3:
+        print_histogram(persons, 100, [](const Person<int>& p) { return p.weight; }, "Weight");
+        
+        break;
+    case 4:
+        print_histogram(persons, 100, [](const Person<int>& p) { return static_cast<int>(p.str[0]); }, "First letter of string");
+     
+        break;
+    default:
+        std::cout << "Invalid option\n";
+        break;
+    }
 
-    // Печать значений по ключам
-    ht.print(0);  // Ожидается "Alice"
-    ht.print(1);  // Ожидается "Bob"
-    ht.print(2);  // Ожидается "Charlie"
-
-    // Удаляем элемент с ключом 1 (Bob)
-   // ht.remove(1);
-
-    // Попытка печати удаленного элемента
-   // ht.print(1);  // Ожидается сообщение об ошибке, так как Bob был удален
-
-    // Проверка размера хеш-таблицы
-    std::cout << "Size of hash table: " << ht.Getsize() << std::endl;
-
-    return 0;
 }
-*/
-/*
-int main() {
-   
-   // interface_for_histogram_people();
-   // interface_for_histogram_number();
-    return 0;
-}*/
+
+
+
+
+void interface_for_histogram_number(int change) {  // Принимаем флаг Iset как параметр
+    LinkedList<int> numbers;
+    QuickSort<int> sorterr;
+
+    int max_value = -1;
+    int min_value = 1000;
+
+    // Ввод данных
+    std::cout << "Enter 10 numbers" << '\n';
+    for (int i = 0; i < 10; ++i) {
+        int num;
+        std::cin >> num;
+        numbers.Append(num);  // Добавляем элемент в список
+    }
+
+    // Выводим список перед сортировкой для отладки
+    std::cout << "Before sorting: ";
+    numbers.Print();  // Используем метод Print(), чтобы вывести все элементы списка
+    std::cout << std::endl;
+
+    // Сортировка списка
+    sorterr.Sort(numbers, ascendingInt);
+
+    // Выводим список после сортировки для отладки
+    std::cout << "After sorting: ";
+    numbers.Print();  // Используем метод Print(), чтобы вывести отсортированные элементы
+    std::cout << std::endl;
+
+    // Если Iset == true, выполняем удаление дубликатов
+    if (change == 1) {
+        ISet<int> set(numbers);  // Создаём объект ISet для удаления дубликатов
+        set.RemoveDuplicates();  // Удаляем дубликаты
+        std::cout << "After removing duplicates: ";
+        numbers.Print();  // Выводим результат после удаления дубликатов
+    }
+
+    // Получаем итераторы для начала и конца списка
+    auto begin = numbers.GetFirstElement();  // Итератор на первый элемент
+    auto end = numbers.GetLastElement();      // Итератор на "псевдоконец" списка
+
+    std::cout << "Min value: " << numbers.GetFirstElement() << std::endl;
+    std::cout << "Max value: " << numbers.GetLastElement() << std::endl;
+
+    // Вычисляем размер интервала для гистограммы
+    int interval_size = (numbers.GetLastElement() - numbers.GetFirstElement()) / 10 + 1;
+    std::cout << "Interval size: " << interval_size << std::endl;
+
+    // Строим гистограмму
+    for (int i = numbers.GetFirstElement(); i < numbers.GetLastElement(); i += interval_size) {
+        std::cout.width(2);
+        std::cout << i << " - " << i + interval_size << " | ";
+
+        // Маркировка значений в интервале
+        bool found = false;
+
+        auto it = 0;  // Итератор на первый элемент
+        while ((numbers.GetElement(it) != numbers.GetLastElement()) && (numbers.GetLength() != it)) {  // Пока итератор не достигнет конца
+            int value = numbers.GetElement(it); // Получаем значение с помощью GetValue() из элемента
+            if ((value >= i) && (value < i + interval_size)) {
+                std::cout << "x ";
+                found = true;
+            }
+            ++it;  // Переходим к следующему элементу
+        }
+
+        // Если в интервале не было значений, выводим "-"
+        if (!found) {
+            std::cout << "- ";
+        }
+
+        std::cout << std::endl;
+    }
+
+    std::cout << "---------------------------------------" << std::endl;
+}

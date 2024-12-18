@@ -11,10 +11,7 @@ public:
     int weight;
     int height;
     std::string str;
-    /*
-    bool operator==(const Person<T>& other) const {
-        return (age == other.age && weight == other.weight && height == other.height && str == other.str);
-    }*/
+   
 
     friend std::ostream& operator<<(std::ostream& os, const Person<T>& person) {
         os << "Age: " << person.age << ", Weight: " << person.weight
@@ -58,25 +55,4 @@ public:
 
 };
 
-
-/*
-template <class T>
-class Sequence
-{
-
-public:
-    T GetFirst();
-    T GetLast();
-    T Get(int index);
-    Sequence<T> GetSubsequence(int startIndex, int endIndex);
-    int GetLength();
-    void Append(T item);
-    void Prepend(T item);
-    void InsertAt(T item, int index);
-    Sequence<T> Concat(Sequence<T> const& list);
-    void quicksort(Sequence<T>& seq, int (*cmp)(T, T));
-    void insertionsort(Sequence<T>& seq, int (*cmp)(T, T));
-    void bubblesort(Sequence<T>& seq, int (*cmp)(T, T));
-};
-*/
-#endif // SEQUENCE_HPP_INCLUDED
+#endif 

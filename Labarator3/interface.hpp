@@ -1,23 +1,8 @@
-﻿
-#pragma once
-
+﻿#pragma once
 
 #include "histogram.hpp"
 #include "Cache.hpp"
 #include "test_for_cash.hpp"
-
-
-
-#include <locale>  
-#include <clocale> // Äëÿ setlocale
-
-
-
-#include <iostream>
-
-
-
-
 
 
 void interface() {

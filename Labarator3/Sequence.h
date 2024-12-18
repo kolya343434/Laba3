@@ -20,7 +20,7 @@ public:
     virtual void Clear() = 0;
     class Iterator {
     public:
-       // virtual T& operator*() = 0;
+       
         virtual ~Iterator() = default;
         virtual Iterator& operator++() = 0;
         virtual bool operator==(const Iterator& other) const = 0;

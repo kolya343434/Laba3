@@ -2,7 +2,6 @@
 
 #include "Sequence.h"
 
-
 template <class T>
 class ISorter {
 public:
