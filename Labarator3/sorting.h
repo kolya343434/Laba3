@@ -4,6 +4,12 @@
 #include "Sequence.h"
 #include <iostream>
 
+
+
+
+
+
+
 template <typename T>
 class InsertionSort : public ISorter<T> {
 public:

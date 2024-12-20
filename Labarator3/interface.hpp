@@ -5,6 +5,7 @@
 #include "test_for_cash.hpp"
 
 
+
 void interface() {
     int choice;
 
@@ -28,12 +29,12 @@ void interface() {
 
             // Дополнительный выбор для работы с множеством Iset
             int isetChoice;
-            cout << "Хотите ли вы удалить дубликаты из чисел (использовать множество Iset)? (1 - да, 0 - нет): ";
+            cout << "Хотите ли вы удалить дубликаты из чисел (использовать множество IsetSequence)? (1 - да, 0 - нет): ";
             cin >> isetChoice;
 
-            // В зависимости от выбора вызываем нужную функцию
+            
             if (isetChoice == 1) {
-                cout << "Вы выбрали вывести гистограмму с множеством Iset (с удалением дубликатов)." << endl;
+                cout << "Вы выбрали вывести гистограмму с множеством IsetSequence (с удалением дубликатов)." << endl;
                 interface_for_histogram_number(true);  // Вызов с удалением дубликатов
             }
             else if (isetChoice == 0) {
@@ -47,7 +48,7 @@ void interface() {
         else if (choice == 3) {
             cout << "Вы выбрали интерфейс для проверки работы кэша" << endl;
 
-            // Показать пользователю выбор
+            
             int cacheChoice;
             cout << "Выберите опцию для работы с кэшем:" << endl;
             cout << "1. Тестирование работы кэша" << endl;
@@ -60,6 +61,7 @@ void interface() {
             }
             else if (cacheChoice == 2) {
                 runCacheOperations();
+               
             }
             else {
                 cout << "Неверный выбор. Попробуйте снова." << endl;
@@ -67,7 +69,7 @@ void interface() {
         }
         else if (choice == 0) {
             cout << "Выход из программы..." << endl;
-            break;  // Выход из цикла
+            break;  
         }
         else {
             cout << "Неверный выбор. Попробуйте снова." << endl;

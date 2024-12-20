@@ -3,7 +3,7 @@
 
 #include "IDictionary.hpp"
 #include "iterator.hpp"
-
+//днаюбхрэ япюбмемхе яйнкэйн пюанюрер я йщьнл х аег
 template <class TKey, class TElement>
 struct NodeList
 {
@@ -22,9 +22,6 @@ struct NodeList
     NodeList(TKey key, TElement value) : key(key), value(value), prev(nullptr), next(nullptr) {}
     NodeList() : prev(nullptr), next(nullptr) {}
 };
-
-
-
 
 
 template <class TKey, class TElement>

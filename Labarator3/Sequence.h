@@ -32,4 +32,18 @@ public:
     virtual Iterator* ToEnd() = 0;
 };
 
+template <typename T>
+class seq {
+public:
+    virtual ~seq() {}
+
+    // Виртуальные методы, которые должны быть реализованы в производных классах
+    virtual void append(T element) = 0;
+    virtual int getLength() = 0;
+    virtual T& getElement(int index) = 0;
+    virtual void clear() = 0;
+    virtual T& getFirstElement() = 0;
+    virtual T& getLastElement() = 0;
+    virtual void print() = 0;
+};
 

@@ -188,6 +188,28 @@ public:
     {
         return length;
     }
+    const T& operator[](size_t index) const {
+        if (index >= length) {
+            throw std::out_of_range("Index out of range");
+        }
+        Node* current = head;
+        for (size_t i = 0; i < index; ++i) {
+            current = current->next;
+        }
+        return current->data;
+    }
+
+    // Неконстантный оператор []
+    T& operator[](size_t index) {
+        if (index >= length) {
+            throw std::out_of_range("Index out of range");
+        }
+        Node* current = head;
+        for (size_t i = 0; i < index; ++i) {
+            current = current->next;
+        }
+        return current->data;
+    }
 
     void Append(T item) override
     {

@@ -139,6 +139,8 @@
     <ClInclude Include="histogram.hpp" />
     <ClInclude Include="IDictionary.hpp" />
     <ClInclude Include="interface.hpp" />
+    <ClInclude Include="ISet.hpp" />
+    <ClInclude Include="ISortedSequence.h" />
     <ClInclude Include="ISorter.h" />
     <ClInclude Include="iterator.hpp" />
     <ClInclude Include="LinkedList.h" />

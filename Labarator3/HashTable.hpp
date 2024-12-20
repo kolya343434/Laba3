@@ -69,7 +69,7 @@ public:
 
     void insert(TKey key, T value) {
         if (key >= count) {
-            std::cerr << "Key out of bounds!" << std::endl;
+           
             return;
         }
 
@@ -90,7 +90,7 @@ public:
 
     T getValue(TKey key) const {
         if (key >= count) {
-            std::cerr << "Key out of bounds!" << std::endl;
+       
             return T(); // Возвращаем значение по умолчанию
         }
         return items[key].value;
@@ -98,7 +98,7 @@ public:
 
     bool indexIsFree(TKey key) const {
         if (key >= count) {
-            std::cerr << "Key out of bounds!" << std::endl;
+           
             return false;
         }
         return this->items[key].indexIsFree();
@@ -110,7 +110,7 @@ public:
 
     void print(TKey key) const {
         if (key >= count) {
-            std::cerr << "Key out of bounds!" << std::endl;
+
             return;
         }
         std::cout << "Value at key " << key << ": " << getValue(key) << std::endl;
@@ -118,7 +118,7 @@ public:
 
     void remove(TKey key) {
         if (key >= count) {
-            std::cerr << "Key out of bounds!" << std::endl;
+         
             return;
         }
 
